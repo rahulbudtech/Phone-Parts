@@ -79,6 +79,33 @@ async function addEntryToExcel(entry: {
   await workbook.xlsx.writeFile(FILE_PATH);
 }
 
+export async function GET() {
+  try {
+    if (!fs.existsSync(FILE_PATH)) {
+      return NextResponse.json(
+        { error: "No repairs.xlsx file found yet." },
+        { status: 404 }
+      );
+    }
+
+    const fileBuffer = fs.readFileSync(FILE_PATH);
+
+    return new NextResponse(fileBuffer, {
+      headers: {
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Disposition": `attachment; filename="repairs.xlsx"`,
+      },
+    });
+  } catch (err: any) {
+    console.error("Error reading repairs.xlsx:", err);
+    return NextResponse.json(
+      { error: "Failed to read Excel file." },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
