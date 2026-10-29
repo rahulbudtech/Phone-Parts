@@ -1,0 +1,109 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import FeaturesStrip from "@/components/FeaturesStrip";
+
+import BrandsSection from "@/components/BrandsSection";
+import CTAPanel from "@/components/CTAPanel";
+import DetailedServices from "@/components/DetailedServices";
+import Testimonials from "@/components/Testimonials";
+import LocationSection from "@/components/LocationSection";
+import FAQSection from "@/components/FAQSection";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Smartphone Repairs in Invercargill | Phone Parts & Accessories",
+  description: "Fast, reliable iPhone, Samsung, and smartphone repair in Invercargill. Screen replacement, battery replacement, charging port fix and more.",
+};
+
+export default function SmartphoneRepairsPage() {
+  return (
+    <main className="flex flex-col w-full min-h-screen">
+      {/* Cover Banner */}
+      <div className="relative w-full min-h-[580px] md:min-h-[640px] lg:min-h-[700px] py-16 md:py-20 lg:py-24 flex items-center bg-[#0c223a] overflow-hidden">
+        {/* Mobile Background Image */}
+        <div 
+          className="absolute inset-0 z-0 block md:hidden"
+          style={{
+            backgroundImage: "url('/mobile banner.png')",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="absolute inset-0 bg-[#061626]/70"></div>
+        </div>
+
+        {/* Desktop Background Image with Gradient Overlay */}
+        <div 
+          className="absolute inset-0 z-0 hidden md:block"
+          style={{
+            backgroundImage: "url('/background banner.png')",
+            backgroundPosition: "right center",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#061626] from-25% via-[#061626]/60 via-50% to-transparent"></div>
+        </div>
+
+        {/* Content Container */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 flex flex-col justify-center h-full">
+          <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 flex flex-col items-center md:items-start">
+            {/* Main Heading */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+              Smartphone Repairs in Invercargill
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-gray-300 text-base md:text-lg lg:text-xl mb-10 max-w-lg leading-relaxed">
+              From cracked screens and battery problems to charging issues and water damage, our local technicians provide fast, reliable iPhone, Samsung, and smartphone repairs in Invercargill.
+            </p>
+
+            {/* CTA Button */}
+            <Link 
+              href="/#inquire" 
+              className="bg-[#007aff] hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-colors flex items-center justify-center shadow-lg group"
+            >
+              Get a Quote
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+            </Link>
+          </div>
+        </div>
+      </div>
+      
+      {/* Features Strip */}
+      <FeaturesStrip />
+      
+      {/* Overview Paragraph Section */}
+      <section className="bg-white w-full pt-10 md:pt-14 pb-8 md:pb-12">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0c223a] mb-4">
+            Smartphone Repairs
+          </h2>
+          <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-3xl mx-auto [text-wrap:pretty]">
+            Cracked screen, dead battery or a phone that won’t charge? Our smartphone repairs in Invercargill cover iPhone repairs, Samsung repair, Google Pixel, Oppo, Vivo, Xiaomi and Nokia, with most jobs finished in as little as 45 minutes. We replace broken screens, swap worn batteries, fix charging ports, repair cameras and speakers, and deal with water damage and software faults. Every repair uses quality parts and comes with a 12-month warranty on eligible work. Repairs start from $59, and our price match guarantee means you won’t overpay.
+          </p>
+        </div>
+      </section>
+      
+      {/* Call To Action Panel */}
+      <CTAPanel />
+
+      {/* Brands Section */}
+      <BrandsSection />
+      
+      {/* Call To Action Panel */}
+      <CTAPanel />
+      
+      {/* Detailed Services */}
+      <DetailedServices />
+      
+      {/* Testimonials */}
+      <Testimonials />
+      
+      {/* Location Section */}
+      <LocationSection />
+      
+      {/* FAQ Section */}
+      <FAQSection />
+    </main>
+  );
+}
