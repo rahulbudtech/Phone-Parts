@@ -16,7 +16,7 @@ export default function Testimonials() {
       service: "Laptop data recovery"
     },
     {
-      quote: "Quick diagnosis, regular updates and no surprise charges. I would confidently use Fixora again.",
+      quote: "Quick diagnosis, regular updates and no surprise charges. I would confidently use Phone Parts again.",
       name: "Priya S.",
       service: "Samsung charging repair"
     }
