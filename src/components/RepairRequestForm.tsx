@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ArrowRight, ChevronDown, Check, ArrowLeft } from "lucide-react";
+import { ArrowRight, ChevronDown, Check, ArrowLeft, Loader2 } from "lucide-react";
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -43,6 +43,9 @@ export default function RepairRequestForm() {
     phone: false,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const handleIssueChange = useCallback((issue: string) => {
     setFormData((prev) => {
       if (prev.issue === issue) return prev;
@@ -50,7 +53,7 @@ export default function RepairRequestForm() {
     });
   }, []);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (step === 1) {
       const newErrors = { ...errors };
       newErrors.brand = !formData.brand;
@@ -70,7 +73,26 @@ export default function RepairRequestForm() {
       setErrors(newErrors);
 
       if (!newErrors.name && !newErrors.email && !newErrors.phone) {
-        setStep(3);
+        setIsSubmitting(true);
+        setSubmitError(null);
+        try {
+          const res = await fetch("/api/repair-request", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.error || "Failed to submit request.");
+          }
+
+          setStep(3);
+        } catch (err: any) {
+          setSubmitError(err.message || "Failed to save request. Please try again.");
+        } finally {
+          setIsSubmitting(false);
+        }
       }
     }
   };
@@ -104,6 +126,7 @@ export default function RepairRequestForm() {
           <button 
             onClick={() => {
               setStep(1);
+              setSubmitError(null);
               setFormData({
                 brand: "",
                 model: "",
@@ -321,12 +344,19 @@ export default function RepairRequestForm() {
               </div>
             )}
 
+            {submitError && (
+              <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm p-3 rounded-md">
+                {submitError}
+              </div>
+            )}
+
             {/* Submit / Navigation Buttons */}
             <div className="flex justify-between items-center pt-2">
               {step > 1 ? (
                 <button 
                   onClick={handleBack}
-                  className="text-white hover:text-gray-300 font-medium text-sm flex items-center space-x-2 transition-colors"
+                  disabled={isSubmitting}
+                  className="text-white hover:text-gray-300 disabled:opacity-50 font-medium text-sm flex items-center space-x-2 transition-colors cursor-pointer disabled:cursor-not-allowed"
                 >
                   <ArrowLeft size={16} />
                   <span>Back</span>
@@ -337,10 +367,20 @@ export default function RepairRequestForm() {
               
               <button 
                 onClick={handleContinue}
-                className="bg-[#007aff] hover:bg-blue-600 text-white font-medium text-sm py-2.5 px-6 rounded-md flex items-center space-x-2 transition-colors"
+                disabled={isSubmitting}
+                className="bg-[#007aff] hover:bg-blue-600 disabled:bg-[#007aff]/60 text-white font-medium text-sm py-2.5 px-6 rounded-md flex items-center space-x-2 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
-                <span>{step === 3 ? "Submit" : "Continue"}</span>
-                <ArrowRight size={16} />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{step === 2 ? "Submit Request" : "Continue"}</span>
+                    <ArrowRight size={16} />
+                  </>
+                )}
               </button>
             </div>
           </div>
