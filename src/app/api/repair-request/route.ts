@@ -58,7 +58,6 @@ async function addEntryToExcel(entry: {
     worksheet.columns = COLUMNS;
     styleHeaderRow(worksheet);
   } else {
-    // Ensure column widths are maintained
     worksheet.columns = COLUMNS;
   }
 
@@ -77,6 +76,38 @@ async function addEntryToExcel(entry: {
   newRow.font = { name: "Arial", size: 10 };
 
   await workbook.xlsx.writeFile(FILE_PATH);
+}
+
+// Forward data to Google Sheets via Google Apps Script Web App
+async function sendToGoogleSheet(entry: {
+  date: string;
+  brand: string;
+  model: string;
+  issue: string;
+  description: string;
+  name: string;
+  email: string;
+  phone: string;
+}) {
+  const googleSheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  if (!googleSheetUrl) {
+    return false;
+  }
+
+  const response = await fetch(googleSheetUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(entry),
+    redirect: "follow",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Google Sheets responded with status ${response.status}`);
+  }
+
+  return true;
 }
 
 export async function GET() {
@@ -133,17 +164,34 @@ export async function POST(req: Request) {
       phone: String(phone).trim(),
     };
 
-    // Sequential queue to guarantee safe atomic file writes
-    await new Promise<void>((resolve, reject) => {
-      writeQueue = writeQueue
-        .then(() => addEntryToExcel(entry))
-        .then(() => resolve())
-        .catch((err) => reject(err));
-    });
+    // 1. Send to Google Sheets if configured
+    let sentToGoogleSheets = false;
+    if (process.env.GOOGLE_SHEET_WEBHOOK_URL) {
+      try {
+        sentToGoogleSheets = await sendToGoogleSheet(entry);
+      } catch (sheetError) {
+        console.error("Failed to push to Google Sheet:", sheetError);
+      }
+    }
 
-    return NextResponse.json({ success: true });
+    // 2. Also save to local Excel as fallback / local backup
+    try {
+      await new Promise<void>((resolve, reject) => {
+        writeQueue = writeQueue
+          .then(() => addEntryToExcel(entry))
+          .then(() => resolve())
+          .catch((err) => reject(err));
+      });
+    } catch (excelErr) {
+      console.warn("Local Excel write skipped or failed:", excelErr);
+    }
+
+    return NextResponse.json({
+      success: true,
+      googleSheets: sentToGoogleSheets,
+    });
   } catch (err: any) {
-    console.error("Error saving repair request to Excel:", err);
+    console.error("Error processing repair request:", err);
     return NextResponse.json(
       { error: "Failed to save request. Please try again later." },
       { status: 500 }
