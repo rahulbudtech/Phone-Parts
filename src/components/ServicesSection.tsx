@@ -9,25 +9,25 @@ export default function ServicesSection() {
     {
       title: "Smartphone Repairs",
       description: " We repair common iPhone, Samsung and other smartphone issues, including screens, batteries and charging.",
-      image: "/phone.png",
+      image: "/phone.webp",
       link: "/smartphone-repairs"
     },
     {
       title: "Mac & Laptop Repairs",
       description: " Laptop or MacBook not working properly? We handle screen, battery, keyboard, charging and performance issues.",
-      image: "/mac.png",
+      image: "/mac.webp",
       link: "/mac-laptop-repairs"
     },
     {
       title: "iPad & Tablet Repairs",
       description: "We repair iPads and tablets with cracked screens, battery problems, charging faults and other common issues.",
-      image: "/ipad.png",
+      image: "/ipad.webp",
       link: "/ipad-tablet-repairs"
     },
     {
       title: "PC & Computer Repairs",
       description: " Get help with slow computers, hardware problems, software issues, upgrades and more.",
-      image: "/computer repaire.png",
+      image: "/computer repaire.webp",
       link: "/pc-computer-repairs"
     }
   ];

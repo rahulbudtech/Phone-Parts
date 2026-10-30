@@ -24,7 +24,7 @@ export default function IpadTabletRepairsPage() {
         <div 
           className="absolute inset-0 z-0 block md:hidden"
           style={{
-            backgroundImage: "url('/ipad-banner-mobile.jpg')",
+            backgroundImage: "url('/ipad-banner-mobile.webp')",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -36,7 +36,7 @@ export default function IpadTabletRepairsPage() {
         <div 
           className="absolute inset-0 z-0 hidden md:block"
           style={{
-            backgroundImage: "url('/ipad-banner-desktop.png')",
+            backgroundImage: "url('/ipad-banner-desktop.webp')",
             backgroundPosition: "right center",
             backgroundSize: "cover",
           }}
@@ -84,7 +84,9 @@ export default function IpadTabletRepairsPage() {
         </div>
       </section>
       
-     
+      {/* Call To Action Panel */}
+      <CTAPanel />
+
       {/* Brands Section */}
       <BrandsSection />
       

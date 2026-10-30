@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="flex flex-col col-span-2 md:col-span-1">
             {/* Logo */}
             <Link href="/" className="flex items-center mb-4 inline-block">
-              <img src="/logo.png" alt="Phone Parts & Accessories" className="h-10 w-auto bg-white p-1.5 rounded-md" />
+              <img src="/logo.webp" alt="Phone Parts & Accessories" className="h-10 w-auto bg-white p-1.5 rounded-md" />
             </Link>
             <p className="text-gray-400 text-xs leading-relaxed max-w-xs">
               Reliable repairs for the devices you rely on every day.

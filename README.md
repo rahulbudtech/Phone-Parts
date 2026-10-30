@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Phone Parts & Accessories — Web Application
 
-## Getting Started
+Professional device repair service platform built with Next.js (App Router), React, and Tailwind CSS.
 
-First, run the development server:
+---
 
+## 🚀 Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Google Sheets Integration (Optional for Testing)
+To receive live form submissions into your own Google Sheet:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Create a new Google Sheet at [sheets.new](https://sheets.new).
+2. Go to **Extensions** → **Apps Script**.
+3. Replace any code with the script below:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```javascript
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    
+    // Add header row if empty
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Date & Time", "Brand", "Model", "Issue", "Description", "Customer Name", "Email", "Phone"]);
+      var headerRange = sheet.getRange(1, 1, 1, 8);
+      headerRange.setBackground("#0c223a");
+      headerRange.setFontColor("#ffffff");
+      headerRange.setFontWeight("bold");
+    }
+    
+    // Append submission
+    sheet.appendRow([
+      data.date || new Date().toLocaleString(),
+      data.brand || "",
+      data.model || "",
+      data.issue || "",
+      data.description || "",
+      data.name || "",
+      data.email || "",
+      data.phone || ""
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
 
-## Learn More
+4. Click **Deploy** → **New deployment** → Select type **Web app**.
+   - **Execute as**: `Me`
+   - **Who has access**: `Anyone`
+5. Copy the generated **Web app URL**.
+6. Create or edit `.env.local` in the project root:
+```env
+GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+```
 
-To learn more about Next.js, take a look at the following resources:
+*(Note: If no Google Sheet URL is provided, submissions are automatically saved to `data/repairs.xlsx` locally as a fallback).*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000) in your browser to test. Fill out the repair inquiry form, submit, and see the entry appear instantly in your Google Sheet!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19, Lucide Icons, Tailwind CSS v4
+- **Backend / Storage**: Next.js Route Handlers, Google Sheets Webhook, ExcelJS fallback

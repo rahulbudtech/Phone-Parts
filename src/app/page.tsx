@@ -18,7 +18,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 z-0 block md:hidden"
           style={{
-            backgroundImage: "url('/mobile banner.png')",
+            backgroundImage: "url('/mobile banner.webp')",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -30,7 +30,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 z-0 hidden md:block"
           style={{
-            backgroundImage: "url('/background banner.png')",
+            backgroundImage: "url('/background banner.webp')",
             backgroundPosition: "right center",
             backgroundSize: "cover",
           }}

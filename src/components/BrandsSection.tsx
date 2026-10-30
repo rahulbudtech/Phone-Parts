@@ -5,42 +5,42 @@ export default function BrandsSection({ className = "" }: { className?: string }
   const brands = [
     {
       name: "Apple",
-      logo: "/apple.png",
+      logo: "/apple.webp",
       description: "iPhone screen repairs, battery replacements, charging repairs and MacBook repairs in Invercargill, plus iPad and Apple Watch repairs.",
     },
     {
       name: "Samsung",
-      logo: "/samsung.png",
+      logo: "/samsung.webp",
       description: "Samsung Galaxy screen repairs, battery replacements and charging repairs in Invercargill, including Galaxy S, A and Tab devices..",
     },
     {
       name: "Oppo",
-      logo: "/oppo.png",
+      logo: "/oppo.webp",
       description: "Oppo screen, battery, camera and charging repairs for popular Find and Reno models, with professional repair service in Invercargill.",
     },
     {
       name: "Nokia",
-      logo: "/nokia.png",
+      logo: "/nokia.webp",
       description: "Nokia phone and tablet repairs covering screen, battery, charging and common hardware issues across supported models.",
     },
     {
       name: "Google",
-      logo: "/google.png",
+      logo: "/google.webp",
       description: "Google Pixel screen repairs, battery replacements and charging repairs, with professional service and clear quotes.",
     },
     {
       name: "Microsoft",
-      logo: "/microsoft.png",
+      logo: "/microsoft.webp",
       description: "Surface and Surface Laptop repairs covering screens, batteries, keyboards and other hardware issues.",
     },
     {
       name: "Lenovo",
-      logo: "/lenovo.png",
+      logo: "/lenovo.webp",
       description: "Lenovo ThinkPad, IdeaPad and Yoga repairs covering screens, batteries, charging issues and common hardware faults.",
     },
     {
       name: "Dell",
-      logo: "/dell.png",
+      logo: "/dell.webp",
       description: "Dell XPS, Inspiron and laptop repairs covering screen replacement, battery issues, charging problems and hardware faults.",
     }
   ];
