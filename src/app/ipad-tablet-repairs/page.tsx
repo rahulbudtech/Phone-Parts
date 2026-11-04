@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
-// import HowItWorks from "@/components/HowItWorks";
-import BrandsSection from "@/components/BrandsSection";
+
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -14,6 +14,39 @@ export const metadata: Metadata = {
   title: "iPad & Tablet Repairs in Invercargill | Phone Parts & Accessories",
   description: "Fast, trusted iPad and tablet repair in Invercargill. Screen replacements, battery fixes, and charging port repair for Apple iPad and Samsung Galaxy Tab.",
 };
+
+const tabletBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iPad screen replacements, battery repairs, charging issues and hardware troubleshooting across supported iPad, iPad Air, iPad Pro and iPad mini models.",
+  },
+  {
+    name: "Samsung",
+    logo: "/samsung.webp",
+    description: "Samsung Galaxy Tab repairs covering screen replacements, battery issues, charging problems and common hardware faults across supported models.",
+  },
+  {
+    name: "Lenovo",
+    logo: "/lenovo.webp",
+    description: "Lenovo Tab repairs, including screen damage, battery replacements, charging issues and hardware troubleshooting across supported tablet models.",
+  },
+  {
+    name: "Microsoft",
+    logo: "/microsoft.webp",
+    description: "Microsoft Surface Pro repairs covering screen replacements, battery issues, charging problems and common hardware faults across supported devices.",
+  },
+  {
+    name: "Xiaomi",
+    logo: "/xiaomi.webp",
+    description: "Xiaomi Pad and Redmi Pad repairs, including screen replacements, battery servicing, charging issues and common hardware problems.",
+  },
+  {
+    name: "OPPO",
+    logo: "/oppo.webp",
+    description: "OPPO Pad repairs for damaged screens, battery replacements, charging problems and common hardware issues across supported models.",
+  },
+];
 
 export default function IpadTabletRepairsPage() {
   return (
@@ -88,7 +121,11 @@ export default function IpadTabletRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={tabletBrands}
+        title="Tablet & iPad Repairs Across Major Brands"
+        description="From Apple iPad screen replacements and battery swaps to Samsung Galaxy Tab, Microsoft Surface, Lenovo Tab, Xiaomi Pad and OPPO Pad repairs in Invercargill, our repair team works with all leading tablet brands."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />

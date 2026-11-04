@@ -118,12 +118,18 @@ export default function BrandsSection({
     };
   }, []);
 
-  const row1 = Array(10).fill(brands.slice(0, 4)).flat();
-  const row2 = Array(10).fill(brands.slice(4, 8)).flat();
+  const half = Math.ceil(brands.length / 2);
+  const row1Slice = brands.slice(0, half);
+  const row2Slice = brands.slice(half);
+  const row1 = Array(10).fill(row1Slice).flat();
+  const row2 = Array(10).fill(row2Slice).flat();
+  const gridColsClass = half <= 3 
+    ? "md:grid md:grid-cols-3 md:gap-8" 
+    : "md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8";
 
   const BrandCard = ({ brand, index }: { brand: BrandItem, index: number }) => (
     <div 
-      className={`flex-none w-[85vw] snap-center flex flex-col bg-white rounded-2xl border border-[#007aff]/30 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#007aff] transition-all duration-300 p-10 items-center text-center cursor-default group ${index >= 4 ? 'md:hidden' : 'md:flex md:w-auto'}`}
+      className={`flex-none w-[85vw] snap-center flex flex-col bg-white rounded-2xl border border-[#007aff]/30 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#007aff] transition-all duration-300 p-10 items-center text-center cursor-default group ${index >= half ? 'md:hidden' : 'md:flex md:w-auto'}`}
     >
       <div className="h-20 w-full flex items-center justify-center mb-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -163,7 +169,7 @@ export default function BrandsSection({
           {/* Row 1 */}
           <div 
             ref={scrollRef1}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-2 pt-2 px-2 -mx-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className={`flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-2 pt-2 px-2 -mx-2 ${gridColsClass} md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           >
             {row1.map((brand, index) => (
               <BrandCard key={`r1-${index}`} brand={brand} index={index} />
@@ -173,7 +179,7 @@ export default function BrandsSection({
           {/* Row 2 */}
           <div 
             ref={scrollRef2}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-4 pt-2 px-2 -mx-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className={`flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-4 pt-2 px-2 -mx-2 ${gridColsClass} md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           >
             {row2.map((brand, index) => (
               <BrandCard key={`r2-${index}`} brand={brand} index={index} />
