@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
 
-import BrandsSection from "@/components/BrandsSection";
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -14,6 +14,49 @@ export const metadata: Metadata = {
   title: "PC & Computer Repairs in Invercargill | Phone Parts & Accessories",
   description: "Reliable desktop PC and computer repair services in Invercargill. Diagnostics, slow performance fixes, component replacement, and software support.",
 };
+
+const pcComputerBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iMac, Mac mini and Mac Studio repairs covering hardware faults, power issues, storage problems and other common desktop issues.",
+  },
+  {
+    name: "HP",
+    logo: "/hp.webp",
+    description: "HP Pavilion, ProDesk and EliteDesk desktop repairs covering hardware faults, power issues, component replacements and performance issues.",
+  },
+  {
+    name: "Dell",
+    logo: "/dell.webp",
+    description: "Dell OptiPlex, XPS and Precision desktop repairs covering hardware problems, power faults, storage issues and component replacements.",
+  },
+  {
+    name: "Lenovo",
+    logo: "/lenovo.webp",
+    description: "Lenovo ThinkCentre, IdeaCentre and ThinkStation repairs covering hardware faults, startup problems, component issues and performance troubleshooting.",
+  },
+  {
+    name: "Acer",
+    logo: "/acer.webp",
+    description: "Acer Aspire, Veriton and Predator desktop repairs covering hardware faults, power issues, storage problems and common component failures.",
+  },
+  {
+    name: "ASUS",
+    logo: "/asus.webp",
+    description: "ASUS ExpertCenter, ProArt and ROG desktop repairs covering hardware issues, power faults, component replacements and performance problems.",
+  },
+  {
+    name: "MSI",
+    logo: "/msi.webp",
+    description: "MSI desktop PC repairs covering gaming and professional systems, including hardware faults, power issues, cooling problems and component replacements.",
+  },
+  {
+    name: "Beelink",
+    logo: "/beelink.webp",
+    description: "Beelink mini PC repairs covering startup issues, power problems, storage faults and common hardware issues.",
+  },
+];
 
 export default function PcComputerRepairsPage() {
   return (
@@ -88,7 +131,11 @@ export default function PcComputerRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={pcComputerBrands}
+        title="PC & Desktop Repairs Across Major Brands"
+        description="From Apple iMac and Mac mini repairs to Dell, HP, Lenovo, Acer, ASUS, MSI and Beelink desktop and mini PC repairs in Invercargill, our repair team works with all leading computer brands. We handle everything from power supply failures and component upgrades to overheating diagnostics and motherboard troubleshooting."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />
