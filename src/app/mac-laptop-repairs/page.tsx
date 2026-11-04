@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
 
-import BrandsSection from "@/components/BrandsSection";
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -14,6 +14,49 @@ export const metadata: Metadata = {
   title: "Mac & Laptop Repairs in Invercargill | Phone Parts & Accessories",
   description: "Expert MacBook, Apple, Dell, HP, Lenovo laptop repair in Invercargill. Screen replacements, battery fixes, keyboard repairs and hardware troubleshooting.",
 };
+
+const macLaptopBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "MacBook Air and Pro repairs covering damaged screens, battery replacements, keyboard faults, charging problems and common hardware issues.",
+  },
+  {
+    name: "Dell",
+    logo: "/dell.webp",
+    description: "Dell XPS, Inspiron and laptop repairs covering screen replacement, battery issues, charging problems and hardware faults.",
+  },
+  {
+    name: "HP",
+    logo: "/hp.webp",
+    description: "HP Pavilion, Envy, Spectre and EliteBook repairs covering screen replacement, battery issues, keyboard faults and charging problems.",
+  },
+  {
+    name: "Lenovo",
+    logo: "/lenovo.webp",
+    description: "Lenovo ThinkPad, IdeaPad and Yoga repairs covering screens, batteries, charging issues and common hardware faults.",
+  },
+  {
+    name: "ASUS",
+    logo: "/asus.webp",
+    description: "ASUS ZenBook, VivoBook and ROG laptop repairs covering screens, batteries, keyboards and common hardware issues.",
+  },
+  {
+    name: "Acer",
+    logo: "/acer.webp",
+    description: "Acer Aspire, Swift, Spin and Predator laptop repairs covering screen damage, battery issues, keyboard faults and hardware problems.",
+  },
+  {
+    name: "MSI",
+    logo: "/msi.webp",
+    description: "MSI Modern, Prestige, Katana and Cyborg laptop repairs covering screen replacements, battery issues, keyboard faults, charging problems and common hardware issues.",
+  },
+  {
+    name: "Microsoft",
+    logo: "/microsoft.webp",
+    description: "Surface and Surface Laptop repairs covering screens, batteries, keyboards and other hardware issues.",
+  },
+];
 
 export default function MacLaptopRepairsPage() {
   return (
@@ -88,7 +131,11 @@ export default function MacLaptopRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={macLaptopBrands}
+        title="Laptop & MacBook Repairs Across Major Brands"
+        description="From MacBook screen replacements and battery swaps to Dell, HP, Lenovo, ASUS, Acer and MSI laptop repairs in Invercargill, our repair team works with all major computer manufacturers. We handle everything from shattered displays and failing keyboards to liquid damage diagnostics and motherboard repairs."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />
