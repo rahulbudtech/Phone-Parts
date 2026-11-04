@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
 
-import BrandsSection from "@/components/BrandsSection";
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -14,6 +14,49 @@ export const metadata: Metadata = {
   title: "Smartphone Repairs in Invercargill | Phone Parts & Accessories",
   description: "Fast, reliable iPhone, Samsung, and smartphone repair in Invercargill. Screen replacement, battery replacement, charging port fix and more.",
 };
+
+const smartphoneBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iPhone screen repairs, battery replacements, charging repairs and back glass fixes in Invercargill, plus Apple Watch and iPad service.",
+  },
+  {
+    name: "Samsung",
+    logo: "/samsung.webp",
+    description: "Samsung Galaxy screen repairs, battery replacements and charging repairs in Invercargill, including Galaxy S, A, Z Flip and Fold series.",
+  },
+  {
+    name: "Oppo",
+    logo: "/oppo.webp",
+    description: "Oppo screen, battery, camera and charging repairs for popular Find and Reno models, with professional repair service in Invercargill.",
+  },
+  {
+    name: "Nokia",
+    logo: "/nokia.webp",
+    description: "Nokia phone repairs covering screen, battery, charging and common hardware issues across supported models.",
+  },
+  {
+    name: "Google",
+    logo: "/google.webp",
+    description: "Google Pixel screen repairs, battery replacements and charging repairs, with professional service and clear quotes.",
+  },
+  {
+    name: "Xiaomi",
+    logo: "/xiaomi.webp",
+    description: "Xiaomi phone screen repairs, battery replacements and charging repairs, covering Redmi and Xiaomi smartphone models.",
+  },
+  {
+    name: "Motorola",
+    logo: "/motorola.webp",
+    description: "Motorola phone repairs, including screen replacements, battery issues and charging repairs across supported Moto models.",
+  },
+  {
+    name: "Huawei",
+    logo: "/huawei.webp",
+    description: "Huawei phone screen repairs, battery replacements and charging repairs, with professional service across supported smartphone models.",
+  },
+];
 
 export default function SmartphoneRepairsPage() {
   return (
@@ -88,7 +131,11 @@ export default function SmartphoneRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={smartphoneBrands}
+        title="Smartphone Repairs Across Major Brands"
+        description="From iPhone screen repairs and Samsung battery replacements to Google Pixel, Xiaomi, Oppo, Motorola and Huawei repairs in Invercargill, our repair team works with a wide range of major phone brands. We handle everything from screen replacements, battery replacements and charging issues to back glass repairs and other hardware faults."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />
