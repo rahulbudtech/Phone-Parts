@@ -1,50 +1,68 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function BrandsSection({ className = "" }: { className?: string }) {
-  const brands = [
-    {
-      name: "Apple",
-      logo: "/apple.png",
-      description: "iPhone screen repairs, battery replacements, charging repairs and MacBook repairs in Invercargill, plus iPad and Apple Watch repairs.",
-    },
-    {
-      name: "Samsung",
-      logo: "/samsung.png",
-      description: "Samsung Galaxy screen repairs, battery replacements and charging repairs in Invercargill, including Galaxy S, A and Tab devices..",
-    },
-    {
-      name: "Oppo",
-      logo: "/oppo.png",
-      description: "Oppo screen, battery, camera and charging repairs for popular Find and Reno models, with professional repair service in Invercargill.",
-    },
-    {
-      name: "Nokia",
-      logo: "/nokia.png",
-      description: "Nokia phone and tablet repairs covering screen, battery, charging and common hardware issues across supported models.",
-    },
-    {
-      name: "Google",
-      logo: "/google.png",
-      description: "Google Pixel screen repairs, battery replacements and charging repairs, with professional service and clear quotes.",
-    },
-    {
-      name: "Microsoft",
-      logo: "/microsoft.png",
-      description: "Surface and Surface Laptop repairs covering screens, batteries, keyboards and other hardware issues.",
-    },
-    {
-      name: "Lenovo",
-      logo: "/lenovo.png",
-      description: "Lenovo ThinkPad, IdeaPad and Yoga repairs covering screens, batteries, charging issues and common hardware faults.",
-    },
-    {
-      name: "Dell",
-      logo: "/dell.png",
-      description: "Dell XPS, Inspiron and laptop repairs covering screen replacement, battery issues, charging problems and hardware faults.",
-    }
-  ];
+export interface BrandItem {
+  name: string;
+  logo: string;
+  description: string;
+}
 
+export const defaultBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iPhone screen repairs, battery replacements, charging repairs and MacBook repairs in Invercargill, plus iPad and Apple Watch repairs.",
+  },
+  {
+    name: "Samsung",
+    logo: "/samsung.webp",
+    description: "Samsung Galaxy screen repairs, battery replacements and charging repairs in Invercargill, including Galaxy S, A and Tab devices..",
+  },
+  {
+    name: "Oppo",
+    logo: "/oppo.webp",
+    description: "Oppo screen, battery, camera and charging repairs for popular Find and Reno models, with professional repair service in Invercargill.",
+  },
+  {
+    name: "Nokia",
+    logo: "/nokia.webp",
+    description: "Nokia phone and tablet repairs covering screen, battery, charging and common hardware issues across supported models.",
+  },
+  {
+    name: "Google",
+    logo: "/google.webp",
+    description: "Google Pixel screen repairs, battery replacements and charging repairs, with professional service and clear quotes.",
+  },
+  {
+    name: "Microsoft",
+    logo: "/microsoft.webp",
+    description: "Surface and Surface Laptop repairs covering screens, batteries, keyboards and other hardware issues.",
+  },
+  {
+    name: "Lenovo",
+    logo: "/lenovo.webp",
+    description: "Lenovo ThinkPad, IdeaPad and Yoga repairs covering screens, batteries, charging issues and common hardware faults.",
+  },
+  {
+    name: "Dell",
+    logo: "/dell.webp",
+    description: "Dell XPS, Inspiron and laptop repairs covering screen replacement, battery issues, charging problems and hardware faults.",
+  }
+];
+
+interface BrandsSectionProps {
+  className?: string;
+  brands?: BrandItem[];
+  title?: string;
+  description?: string;
+}
+
+export default function BrandsSection({ 
+  className = "",
+  brands = defaultBrands,
+  title = "Device Repairs Across Major Brands",
+  description = "From iPhone screen repairs and Samsung battery replacements to MacBook, laptop and PC repairs in Invercargill, our repair team works with a wide range of major phone, tablet, laptop and computer brands, including Apple, Samsung, Lenovo, HP and Dell. We handle everything from screen replacements, battery replacements and charging issues to back glass repairs and other hardware faults."
+}: BrandsSectionProps) {
   const scrollRef1 = useRef<HTMLDivElement>(null);
   const scrollRef2 = useRef<HTMLDivElement>(null);
 
@@ -100,18 +118,18 @@ export default function BrandsSection({ className = "" }: { className?: string }
     };
   }, []);
 
-  const row1 = Array(10).fill(brands.slice(0, 4)).flat();
-  const row2 = Array(10).fill(brands.slice(4, 8)).flat();
-
-  interface BrandItem {
-    name: string;
-    logo: string;
-    description: string;
-  }
+  const half = Math.ceil(brands.length / 2);
+  const row1Slice = brands.slice(0, half);
+  const row2Slice = brands.slice(half);
+  const row1 = Array(10).fill(row1Slice).flat();
+  const row2 = Array(10).fill(row2Slice).flat();
+  const gridColsClass = half <= 3 
+    ? "md:grid md:grid-cols-3 md:gap-8" 
+    : "md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8";
 
   const BrandCard = ({ brand, index }: { brand: BrandItem, index: number }) => (
     <div 
-      className={`flex-none w-[85vw] snap-center flex flex-col bg-white rounded-2xl border border-[#007aff]/30 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#007aff] transition-all duration-300 p-10 items-center text-center cursor-default group ${index >= 4 ? 'md:hidden' : 'md:flex md:w-auto'}`}
+      className={`flex-none w-[85vw] snap-center flex flex-col bg-white rounded-2xl border border-[#007aff]/30 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#007aff] transition-all duration-300 p-10 items-center text-center cursor-default group ${index >= half ? 'md:hidden' : 'md:flex md:w-auto'}`}
     >
       <div className="h-20 w-full flex items-center justify-center mb-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -140,10 +158,10 @@ export default function BrandsSection({ className = "" }: { className?: string }
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0c223a] mb-6">
-            Device Repairs Across Major Brands
+            {title}
           </h2>
           <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-            From iPhone screen repairs and Samsung battery replacements to MacBook, laptop and PC repairs in Invercargill, our repair team works with a wide range of major phone, tablet, laptop and computer brands, including Apple, Samsung, Lenovo, HP and Dell. We handle everything from screen replacements, battery replacements and charging issues to back glass repairs and other hardware faults.
+            {description}
           </p>
         </div>
 
@@ -151,7 +169,7 @@ export default function BrandsSection({ className = "" }: { className?: string }
           {/* Row 1 */}
           <div 
             ref={scrollRef1}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-2 pt-2 px-2 -mx-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className={`flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-2 pt-2 px-2 -mx-2 ${gridColsClass} md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           >
             {row1.map((brand, index) => (
               <BrandCard key={`r1-${index}`} brand={brand} index={index} />
@@ -161,7 +179,7 @@ export default function BrandsSection({ className = "" }: { className?: string }
           {/* Row 2 */}
           <div 
             ref={scrollRef2}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-4 pt-2 px-2 -mx-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className={`flex overflow-x-auto snap-x snap-mandatory gap-4 w-full pb-4 pt-2 px-2 -mx-2 ${gridColsClass} md:overflow-visible md:snap-none md:pb-0 md:pt-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           >
             {row2.map((brand, index) => (
               <BrandCard key={`r2-${index}`} brand={brand} index={index} />

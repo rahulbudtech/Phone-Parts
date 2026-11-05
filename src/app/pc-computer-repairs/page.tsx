@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
 
-import BrandsSection from "@/components/BrandsSection";
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -15,45 +15,88 @@ export const metadata: Metadata = {
   description: "Reliable desktop PC and computer repair services in Invercargill. Diagnostics, slow performance fixes, component replacement, and software support.",
 };
 
+const pcComputerBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iMac, Mac mini and Mac Studio repairs covering hardware faults, power issues, storage problems and other common desktop issues.",
+  },
+  {
+    name: "HP",
+    logo: "/hp.webp",
+    description: "HP Pavilion, ProDesk and EliteDesk desktop repairs covering hardware faults, power issues, component replacements and performance issues.",
+  },
+  {
+    name: "Dell",
+    logo: "/dell.webp",
+    description: "Dell OptiPlex, XPS and Precision desktop repairs covering hardware problems, power faults, storage issues and component replacements.",
+  },
+  {
+    name: "Lenovo",
+    logo: "/lenovo.webp",
+    description: "Lenovo ThinkCentre, IdeaCentre and ThinkStation repairs covering hardware faults, startup problems, component issues and performance troubleshooting.",
+  },
+  {
+    name: "Acer",
+    logo: "/acer.webp",
+    description: "Acer Aspire, Veriton and Predator desktop repairs covering hardware faults, power issues, storage problems and common component failures.",
+  },
+  {
+    name: "ASUS",
+    logo: "/asus.webp",
+    description: "ASUS ExpertCenter, ProArt and ROG desktop repairs covering hardware issues, power faults, component replacements and performance problems.",
+  },
+  {
+    name: "MSI",
+    logo: "/msi.webp",
+    description: "MSI desktop PC repairs covering gaming and professional systems, including hardware faults, power issues, cooling problems and component replacements.",
+  },
+  {
+    name: "Beelink",
+    logo: "/beelink.webp",
+    description: "Beelink mini PC repairs covering startup issues, power problems, storage faults and common hardware issues.",
+  },
+];
+
 export default function PcComputerRepairsPage() {
   return (
     <main className="flex flex-col w-full min-h-screen">
       {/* Cover Banner */}
-      <div className="relative w-full min-h-[580px] md:min-h-[640px] lg:min-h-[700px] py-16 md:py-20 lg:py-24 flex items-center bg-[#0c223a] overflow-hidden">
+      <div className="relative w-full min-h-[540px] md:min-h-[580px] lg:min-h-[640px] py-16 md:py-20 lg:py-24 flex items-center bg-[#0c223a] md:bg-[#d9ecfb] overflow-hidden">
         {/* Mobile Background Image */}
         <div 
           className="absolute inset-0 z-0 block md:hidden"
           style={{
-            backgroundImage: "url('/mobile banner.png')",
+            backgroundImage: "url('/pc-banner-mobile.webp')",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         >
-          <div className="absolute inset-0 bg-[#061626]/70"></div>
+          <div className="absolute inset-0 bg-[#061626]/75"></div>
         </div>
 
-        {/* Desktop Background Image with Gradient Overlay */}
+        {/* Desktop Background Image with Responsive Contrast */}
         <div 
           className="absolute inset-0 z-0 hidden md:block"
           style={{
-            backgroundImage: "url('/background banner.png')",
+            backgroundImage: "url('/pc-banner-desktop.webp')",
             backgroundPosition: "right center",
             backgroundSize: "cover",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#061626] from-25% via-[#061626]/60 via-50% to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent md:block lg:hidden hidden"></div>
         </div>
 
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 flex flex-col justify-center h-full">
-          <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 flex flex-col items-center md:items-start">
+          <div className="max-w-md lg:max-w-xl text-center md:text-left mx-auto md:mx-0 flex flex-col items-center md:items-start">
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
-              PC & Computer Repairs in Invercargill
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white md:text-[#0c223a] leading-tight mb-6">
+              PC &amp; Computer Repairs in Invercargill
             </h1>
 
             {/* Subheading */}
-            <p className="text-gray-300 text-base md:text-lg lg:text-xl mb-10 max-w-lg leading-relaxed">
+            <p className="text-gray-200 md:text-gray-700 text-base md:text-lg lg:text-xl mb-10 max-w-lg leading-relaxed">
               Get expert help with slow computers, crashing systems, hardware upgrades, power supply issues, and software troubleshooting in Invercargill.
             </p>
 
@@ -88,7 +131,11 @@ export default function PcComputerRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={pcComputerBrands}
+        title="PC & Desktop Repairs Across Major Brands"
+        description="From Apple iMac and Mac mini repairs to Dell, HP, Lenovo, Acer, ASUS, MSI and Beelink desktop and mini PC repairs in Invercargill, our repair team works with all leading computer brands. We handle everything from power supply failures and component upgrades to overheating diagnostics and motherboard troubleshooting."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />

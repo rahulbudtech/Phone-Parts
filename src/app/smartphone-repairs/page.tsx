@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FeaturesStrip from "@/components/FeaturesStrip";
 
-import BrandsSection from "@/components/BrandsSection";
+import BrandsSection, { BrandItem } from "@/components/BrandsSection";
 import CTAPanel from "@/components/CTAPanel";
 import DetailedServices from "@/components/DetailedServices";
 import Testimonials from "@/components/Testimonials";
@@ -15,45 +15,88 @@ export const metadata: Metadata = {
   description: "Fast, reliable iPhone, Samsung, and smartphone repair in Invercargill. Screen replacement, battery replacement, charging port fix and more.",
 };
 
+const smartphoneBrands: BrandItem[] = [
+  {
+    name: "Apple",
+    logo: "/apple.webp",
+    description: "iPhone screen repairs, battery replacements, charging repairs and back glass fixes in Invercargill, plus Apple Watch and iPad service.",
+  },
+  {
+    name: "Samsung",
+    logo: "/samsung.webp",
+    description: "Samsung Galaxy screen repairs, battery replacements and charging repairs in Invercargill, including Galaxy S, A, Z Flip and Fold series.",
+  },
+  {
+    name: "Oppo",
+    logo: "/oppo.webp",
+    description: "Oppo screen, battery, camera and charging repairs for popular Find and Reno models, with professional repair service in Invercargill.",
+  },
+  {
+    name: "Nokia",
+    logo: "/nokia.webp",
+    description: "Nokia phone repairs covering screen, battery, charging and common hardware issues across supported models.",
+  },
+  {
+    name: "Google",
+    logo: "/google.webp",
+    description: "Google Pixel screen repairs, battery replacements and charging repairs, with professional service and clear quotes.",
+  },
+  {
+    name: "Xiaomi",
+    logo: "/xiaomi.webp",
+    description: "Xiaomi phone screen repairs, battery replacements and charging repairs, covering Redmi and Xiaomi smartphone models.",
+  },
+  {
+    name: "Motorola",
+    logo: "/motorola.webp",
+    description: "Motorola phone repairs, including screen replacements, battery issues and charging repairs across supported Moto models.",
+  },
+  {
+    name: "Huawei",
+    logo: "/huawei.webp",
+    description: "Huawei phone screen repairs, battery replacements and charging repairs, with professional service across supported smartphone models.",
+  },
+];
+
 export default function SmartphoneRepairsPage() {
   return (
     <main className="flex flex-col w-full min-h-screen">
       {/* Cover Banner */}
-      <div className="relative w-full min-h-[580px] md:min-h-[640px] lg:min-h-[700px] py-16 md:py-20 lg:py-24 flex items-center bg-[#0c223a] overflow-hidden">
+      <div className="relative w-full min-h-[540px] md:min-h-[580px] lg:min-h-[640px] py-16 md:py-20 lg:py-24 flex items-center bg-[#0c223a] md:bg-[#d8ecfc] overflow-hidden">
         {/* Mobile Background Image */}
         <div 
           className="absolute inset-0 z-0 block md:hidden"
           style={{
-            backgroundImage: "url('/mobile banner.png')",
+            backgroundImage: "url('/smartphone-banner-mobile.webp')",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         >
-          <div className="absolute inset-0 bg-[#061626]/70"></div>
+          <div className="absolute inset-0 bg-[#061626]/75"></div>
         </div>
 
-        {/* Desktop Background Image with Gradient Overlay */}
+        {/* Desktop Background Image with Responsive Contrast */}
         <div 
           className="absolute inset-0 z-0 hidden md:block"
           style={{
-            backgroundImage: "url('/background banner.png')",
+            backgroundImage: "url('/smartphone-banner-desktop.webp')",
             backgroundPosition: "right center",
             backgroundSize: "cover",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#061626] from-25% via-[#061626]/60 via-50% to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent md:block lg:hidden hidden"></div>
         </div>
 
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 flex flex-col justify-center h-full">
-          <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 flex flex-col items-center md:items-start">
+          <div className="max-w-md lg:max-w-xl text-center md:text-left mx-auto md:mx-0 flex flex-col items-center md:items-start">
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white md:text-[#0c223a] leading-tight mb-6">
               Smartphone Repairs in Invercargill
             </h1>
 
             {/* Subheading */}
-            <p className="text-gray-300 text-base md:text-lg lg:text-xl mb-10 max-w-lg leading-relaxed">
+            <p className="text-gray-200 md:text-gray-700 text-base md:text-lg lg:text-xl mb-10 max-w-lg leading-relaxed">
               From cracked screens and battery problems to charging issues and water damage, our local technicians provide fast, reliable iPhone, Samsung, and smartphone repairs in Invercargill.
             </p>
 
@@ -88,7 +131,11 @@ export default function SmartphoneRepairsPage() {
       <CTAPanel />
 
       {/* Brands Section */}
-      <BrandsSection />
+      <BrandsSection 
+        brands={smartphoneBrands}
+        title="Smartphone Repairs Across Major Brands"
+        description="From iPhone screen repairs and Samsung battery replacements to Google Pixel, Xiaomi, Oppo, Motorola and Huawei repairs in Invercargill, our repair team works with a wide range of major phone brands. We handle everything from screen replacements, battery replacements and charging issues to back glass repairs and other hardware faults."
+      />
       
       {/* Call To Action Panel */}
       <CTAPanel />

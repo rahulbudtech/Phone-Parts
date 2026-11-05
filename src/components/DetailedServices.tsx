@@ -5,42 +5,42 @@ import Link from "next/link";
 export default function DetailedServices() {
   const services = [
     {
-      image: "/screen repaire.png",
+      image: "/screen repaire.webp",
       title: "Screen Replacement",
       description: "Cracked, broken or unresponsive screens? We can assess your device and advise on the appropriate screen repair.",
     },
     {
-      image: "/battery repaire.png",
+      image: "/battery repaire.webp",
       title: "Battery Replacement",
       description: "If your battery drains quickly, won't hold charge or shuts down unexpectedly, a battery replacement may help.",
     },
     {
-      image: "/charging repaire.png",
+      image: "/charging repaire.webp",
       title: "Charging Repairs",
       description: "Having trouble charging your device? We can diagnose charging and port-related issues.",
     },
     {
-      image: "/liquid damage.png",
+      image: "/liquid damage.webp",
       title: "Water & Liqud Damage",
       description: "Liquid damage can affect multiple components. Bring your device in as soon as possible for an assessment.",
     },
     {
-      image: "/Software Support.png",
+      image: "/Software Support.webp",
       title: "Software Issues",
       description: "Slow performance, crashes, update problems and other software issues can often be diagnosed and resolved.",
     },
     {
-      image: "/camera-and-audio.png",
+      image: "/camera-and-audio.webp",
       title: "Camera & Audio Repairs",
       description: "Problems with cameras, microphones, speakers or other components can affect everyday use. We can assess the fault.",
     },
     {
-      image: "/board repaire.png",
+      image: "/board repaire.webp",
       title: "Other Hardware Repairs",
       description: "From damaged components to unexpected hardware faults, our technicians can assess the issue and advise on your options.",
     },
     {
-      image: "/data-and-device-support.png",
+      image: "/data-and-device-support.webp",
       title: "Data & Device Support",
       description: "Need help accessing, transferring or recovering important data? Ask our team what support is available for your device.",
     },

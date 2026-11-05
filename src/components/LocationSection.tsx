@@ -61,7 +61,7 @@ export default function LocationSection() {
                 </div>
                 <div className="flex flex-col items-start">
                   <p className="text-[#0c223a] font-bold">+64 3 242 0424</p>
-                  <p className="text-[#0c223a] font-bold">+64 3 568 8291</p>
+                  <p className="text-[#0c223a] font-bold">+022 216 2842</p>
                 </div>
               </div>
 
