@@ -78,6 +78,10 @@ async function addEntryToExcel(entry: {
   await workbook.xlsx.writeFile(FILE_PATH);
 }
 
+// Fallback Google Sheet Webhook URL in case environment variable is not set on live hosting
+const DEFAULT_GOOGLE_SHEET_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbya2gsmclPwGFmYvv679VXF4iz-jz4H3ccIbgVGQysklWHlIRDcqcl1VyY0cp44pTaS/exec";
+
 // Forward data to Google Sheets via Google Apps Script Web App
 async function sendToGoogleSheet(entry: {
   date: string;
@@ -89,7 +93,8 @@ async function sendToGoogleSheet(entry: {
   email: string;
   phone: string;
 }) {
-  const googleSheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  const googleSheetUrl =
+    process.env.GOOGLE_SHEET_WEBHOOK_URL || DEFAULT_GOOGLE_SHEET_WEBHOOK_URL;
   if (!googleSheetUrl) {
     return false;
   }
@@ -164,14 +169,12 @@ export async function POST(req: Request) {
       phone: String(phone).trim(),
     };
 
-    // 1. Send to Google Sheets if configured
+    // 1. Send to Google Sheets (always active: uses env variable or fallback URL)
     let sentToGoogleSheets = false;
-    if (process.env.GOOGLE_SHEET_WEBHOOK_URL) {
-      try {
-        sentToGoogleSheets = await sendToGoogleSheet(entry);
-      } catch (sheetError) {
-        console.error("Failed to push to Google Sheet:", sheetError);
-      }
+    try {
+      sentToGoogleSheets = await sendToGoogleSheet(entry);
+    } catch (sheetError) {
+      console.error("Failed to push to Google Sheet:", sheetError);
     }
 
     // 2. Also save to local Excel as fallback / local backup
