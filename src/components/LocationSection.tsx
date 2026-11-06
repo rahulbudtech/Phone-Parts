@@ -56,12 +56,26 @@ export default function LocationSection() {
 
               {/* Phone */}
               <div className="flex flex-col lg:flex-row items-start space-y-2 lg:space-y-0 lg:space-x-4 text-left">
-                <div className="lg:mt-1">
+                <a 
+                  href="tel:+6432420424" 
+                  aria-label="Call +64 3 242 0424" 
+                  className="lg:mt-1 hover:opacity-80 transition-opacity"
+                >
                   <Phone size={20} className="text-[#007aff]" />
-                </div>
+                </a>
                 <div className="flex flex-col items-start">
-                  <p className="text-[#0c223a] font-bold">+64 3 242 0424</p>
-                  <p className="text-[#0c223a] font-bold">+022 216 2842</p>
+                  <a 
+                    href="tel:+6432420424" 
+                    className="text-[#0c223a] font-bold hover:text-[#007aff] transition-colors"
+                  >
+                    +64 3 242 0424
+                  </a>
+                  <a 
+                    href="tel:+64222162842" 
+                    className="text-[#0c223a] font-bold hover:text-[#007aff] transition-colors"
+                  >
+                    +022 216 2842
+                  </a>
                 </div>
               </div>
 

@@ -7,10 +7,14 @@ export default function Header() {
       {/* Top Bar */}
       <div className="bg-[#0c223a] w-full">
         <div className="max-w-7xl mx-auto w-full px-4 md:px-6 flex justify-between items-center text-white text-xs py-2">
-          <div className="flex items-center space-x-1 md:space-x-2 md:ml-[130px]">
+          <a 
+            href="tel:+6432420424" 
+            className="flex items-center space-x-1 md:space-x-2 md:ml-[130px] hover:text-[#00aaff] transition-colors"
+            aria-label="Call +03 242 0 424"
+          >
             <Phone size={12} className="md:w-[14px] md:h-[14px]" />
             <span className="text-[10px] sm:text-[11px] md:text-xs">+03 242 0 424</span>
-          </div>
+          </a>
           <div className="flex items-center md:mr-[180px]">
             <div className="flex items-center space-x-1 md:space-x-2">
               <MapPin size={12} className="md:w-[14px] md:h-[14px]" />
