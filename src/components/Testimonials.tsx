@@ -6,19 +6,19 @@ import { Star } from "lucide-react";
 export default function Testimonials() {
   const testimonials = [
     {
-      quote: "My phone screen was replaced the same afternoon and it looks brand new. The quote was clear from the start.",
-      name: "Maya R.",
-      service: "iPhone screen repair"
+      quote: "Staff replaced the battery in my Samsung S23FE. Works perfectly. Fast service and great value for money. Friendly and very helpful staff. Would totally recommend.",
+      name: "Sandra Lea",
+      service: "Google Review"
     },
     {
-      quote: "They recovered years of family photos from a laptop I thought was gone. Professional, patient and honest.",
-      name: "Daniel K.",
-      service: "Laptop data recovery"
+      quote: "Amazing service, screen replaced in less than two hours, fast friendly service",
+      name: "Jared",
+      service: "Google Review"
     },
     {
-      quote: "Quick diagnosis, regular updates and no surprise charges. I would confidently use Phone Parts again.",
-      name: "Priya S.",
-      service: "Samsung charging repair"
+      quote: "Excellent service and great value for money! Very friendly, professional, and helpful. The service was quick, and everything was done really well. I’m very happy with the experience and would definitely recommend them to others. I’ll happily come back again!",
+      name: "Danushka Thiwankaopen",
+      service: "Google Review"
     }
   ];
 

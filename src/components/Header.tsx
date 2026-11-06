@@ -15,12 +15,16 @@ export default function Header() {
             <Phone size={12} className="md:w-[14px] md:h-[14px]" />
             <span className="text-[10px] sm:text-[11px] md:text-xs">+03 242 0 424</span>
           </a>
-          <div className="flex items-center md:mr-[180px]">
-            <div className="flex items-center space-x-1 md:space-x-2">
-              <MapPin size={12} className="md:w-[14px] md:h-[14px]" />
-              <span className="text-[10px] sm:text-[11px] md:text-xs">Shop 3, 24 Leven St<span className="hidden sm:inline">, Invercargill</span></span>
-            </div>
-          </div>
+          <a 
+            href="https://www.google.com/maps/place/Shop+3%2F24+Leven+Street,+Invercargill+9810,+New+Zealand/@-46.410679,168.3426901,17z/data=!3m1!4b1!4m6!3m5!1s0xa9d2c49c71b8ae05:0x27f857e1f12da776!8m2!3d-46.410679!4d168.345265!16s%2Fg%2F11nq8t1hc3?authuser=0&entry=ttu" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-1 md:space-x-2 md:mr-[180px] hover:text-[#00aaff] transition-colors"
+            aria-label="View Shop 3, 24 Leven St, Invercargill on Google Maps"
+          >
+            <MapPin size={12} className="md:w-[14px] md:h-[14px] shrink-0" />
+            <span className="text-[10px] sm:text-[11px] md:text-xs">Shop 3, 24 Leven St, Invercargill</span>
+          </a>
         </div>
       </div>
 
