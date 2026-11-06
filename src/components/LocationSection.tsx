@@ -56,12 +56,26 @@ export default function LocationSection() {
 
               {/* Phone */}
               <div className="flex flex-col lg:flex-row items-start space-y-2 lg:space-y-0 lg:space-x-4 text-left">
-                <div className="lg:mt-1">
+                <a 
+                  href="tel:+6432420424" 
+                  aria-label="Call +64 3 242 0424" 
+                  className="lg:mt-1 hover:opacity-80 transition-opacity"
+                >
                   <Phone size={20} className="text-[#007aff]" />
-                </div>
+                </a>
                 <div className="flex flex-col items-start">
-                  <p className="text-[#0c223a] font-bold">+64 3 242 0424</p>
-                  <p className="text-[#0c223a] font-bold">+022 216 2842</p>
+                  <a 
+                    href="tel:+6432420424" 
+                    className="text-[#0c223a] font-bold hover:text-[#007aff] transition-colors"
+                  >
+                    +64 3 242 0424
+                  </a>
+                  <a 
+                    href="tel:+64222162842" 
+                    className="text-[#0c223a] font-bold hover:text-[#007aff] transition-colors"
+                  >
+                    +64 22 216 2842
+                  </a>
                 </div>
               </div>
 
@@ -72,12 +86,16 @@ export default function LocationSection() {
                 </div>
                 <div className="flex flex-col items-end lg:items-start w-full lg:w-auto">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-2 lg:space-x-4 w-full">
-                    <span className="font-semibold text-[#0c223a]">Weekdays</span>
-                    <span className="text-gray-500">9:30am - 5:30pm</span>
+                    <span className="font-semibold text-[#0c223a]">Monday – Friday</span>
+                    <span className="text-gray-500">9:30 am – 5:30 pm</span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-2 lg:space-x-4 w-full mt-1">
-                    <span className="font-semibold text-[#0c223a]">Weekends</span>
-                    <span className="text-gray-500">10:00am - 5:00pm</span>
+                    <span className="font-semibold text-[#0c223a]">Saturday</span>
+                    <span className="text-gray-500">10:00 am – 5:00 pm</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-2 lg:space-x-4 w-full mt-1">
+                    <span className="font-semibold text-[#0c223a]">Sunday</span>
+                    <span className="text-gray-500">10:00 am – 4:00 pm</span>
                   </div>
                 </div>
               </div>

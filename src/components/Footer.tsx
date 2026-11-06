@@ -39,6 +39,7 @@ export default function Footer() {
             <h4 className="text-white font-bold text-sm mb-2">Talk to a technician</h4>
             <div className="flex flex-col space-y-1 text-gray-400 text-xs">
               <a href="tel:+6432420424" className="hover:text-white transition-colors">+64 3 242 0424</a>
+              <a href="tel:+64222162842" className="hover:text-white transition-colors">+022 216 2842</a>
               <a href="mailto:info@phoneparts.co.nz" className="hover:text-white transition-colors">info@phoneparts.co.nz</a>
             </div>
           </div>
