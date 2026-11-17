@@ -154,6 +154,22 @@ export async function POST(req: Request) {
       );
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(String(email).trim())) {
+      return NextResponse.json(
+        { error: "Please enter a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    const cleanPhone = String(phone).replace(/\D/g, "");
+    if (cleanPhone.length < 8 || cleanPhone.length > 15) {
+      return NextResponse.json(
+        { error: "Please enter a valid phone number (at least 8 digits)." },
+        { status: 400 }
+      );
+    }
+
     const entry = {
       date: new Date().toLocaleString("en-NZ", {
         timeZone: "Pacific/Auckland",

@@ -22,6 +22,32 @@ function IssueParamReader({ onIssueChange }: { onIssueChange: (issue: string) =>
   return null;
 }
 
+function validateEmail(email: string): string {
+  const trimmed = email.trim();
+  if (!trimmed) return "Enter your email";
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(trimmed)) {
+    return "Enter a valid email address (e.g. name@example.com)";
+  }
+  return "";
+}
+
+function validatePhone(phone: string): string {
+  const trimmed = phone.trim();
+  if (!trimmed) return "Enter a phone number";
+  if (!/^[\d\s+\-()]+$/.test(trimmed)) {
+    return "Enter a valid phone number (digits only)";
+  }
+  const digits = trimmed.replace(/\D/g, "");
+  if (digits.length < 8) {
+    return "Phone number must have at least 8 digits";
+  }
+  if (digits.length > 15) {
+    return "Phone number cannot exceed 15 digits";
+  }
+  return "";
+}
+
 export default function RepairRequestForm() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -39,8 +65,8 @@ export default function RepairRequestForm() {
     issue: false,
     description: false,
     name: false,
-    email: false,
-    phone: false,
+    email: "",
+    phone: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,13 +92,19 @@ export default function RepairRequestForm() {
         setStep(2);
       }
     } else if (step === 2) {
-      const newErrors = { ...errors };
-      newErrors.name = !formData.name.trim();
-      newErrors.email = !formData.email.trim();
-      newErrors.phone = !formData.phone.trim();
+      const emailErr = validateEmail(formData.email);
+      const phoneErr = validatePhone(formData.phone);
+      const nameErr = !formData.name.trim();
+
+      const newErrors = {
+        ...errors,
+        name: nameErr,
+        email: emailErr,
+        phone: phoneErr,
+      };
       setErrors(newErrors);
 
-      if (!newErrors.name && !newErrors.email && !newErrors.phone) {
+      if (!nameErr && !emailErr && !phoneErr) {
         setIsSubmitting(true);
         setSubmitError(null);
         try {
@@ -167,6 +199,15 @@ export default function RepairRequestForm() {
                 issue: "",
                 description: "",
                 name: "",
+                email: "",
+                phone: "",
+              });
+              setErrors({
+                brand: false,
+                model: false,
+                issue: false,
+                description: false,
+                name: false,
                 email: "",
                 phone: "",
               });
@@ -353,13 +394,16 @@ export default function RepairRequestForm() {
                     type="email" 
                     value={formData.email}
                     onChange={(e) => {
-                      setFormData({...formData, email: e.target.value});
-                      if (errors.email && e.target.value.trim()) setErrors({...errors, email: false});
+                      const val = e.target.value;
+                      setFormData({ ...formData, email: val });
+                      if (errors.email) {
+                        setErrors((prev) => ({ ...prev, email: validateEmail(val) }));
+                      }
                     }}
                     placeholder="you@example.com" 
                     className={`w-full bg-white text-gray-700 text-base py-3 px-4 rounded-md outline-none focus:ring-2 focus:ring-[#007aff] ${errors.email ? 'border-2 border-[#00aaff]' : ''}`} 
                   />
-                  {errors.email && <span className="text-[#00aaff] text-[13px] font-medium">Enter your email</span>}
+                  {errors.email && <span className="text-[#00aaff] text-[13px] font-medium">{errors.email}</span>}
                 </div>
                 <div className="flex flex-col space-y-2">
                   <label className="text-white text-sm font-medium">Phone</label>
@@ -367,13 +411,16 @@ export default function RepairRequestForm() {
                     type="tel" 
                     value={formData.phone}
                     onChange={(e) => {
-                      setFormData({...formData, phone: e.target.value});
-                      if (errors.phone && e.target.value.trim()) setErrors({...errors, phone: false});
+                      const val = e.target.value;
+                      setFormData({ ...formData, phone: val });
+                      if (errors.phone) {
+                        setErrors((prev) => ({ ...prev, phone: validatePhone(val) }));
+                      }
                     }}
-                    placeholder="Your phone number" 
+                    placeholder="E.g., 021 123 4567" 
                     className={`w-full bg-white text-gray-700 text-base py-3 px-4 rounded-md outline-none focus:ring-2 focus:ring-[#007aff] ${errors.phone ? 'border-2 border-[#00aaff]' : ''}`} 
                   />
-                  {errors.phone && <span className="text-[#00aaff] text-[13px] font-medium">Enter a phone number</span>}
+                  {errors.phone && <span className="text-[#00aaff] text-[13px] font-medium">{errors.phone}</span>}
                 </div>
               </div>
             )}
