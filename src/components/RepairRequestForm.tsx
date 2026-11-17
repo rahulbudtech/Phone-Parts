@@ -76,15 +76,49 @@ export default function RepairRequestForm() {
         setIsSubmitting(true);
         setSubmitError(null);
         try {
-          const res = await fetch("/api/repair-request", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          });
+          let submitted = false;
 
-          if (!res.ok) {
-            const data = await res.json().catch(() => ({}));
-            throw new Error(data.error || "Failed to submit request.");
+          // 1. Try Next.js API route first (works on full Node.js / Vercel servers)
+          try {
+            const res = await fetch("/api/repair-request", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
+
+            if (res.ok) {
+              submitted = true;
+            }
+          } catch (apiErr) {
+            console.warn("Backend API route failed or unreachable:", apiErr);
+          }
+
+          // 2. If API route returned 404/failed (e.g. static hosting on Apache / cPanel), send directly to Google Sheet from browser
+          if (!submitted) {
+            const GOOGLE_SHEET_URL =
+              "https://script.google.com/macros/s/AKfycbya2gsmclPwGFmYvv679VXF4iz-jz4H3ccIbgVGQysklWHlIRDcqcl1VyY0cp44pTaS/exec";
+
+            const payload = {
+              date: new Date().toLocaleString("en-NZ", {
+                timeZone: "Pacific/Auckland",
+                dateStyle: "medium",
+                timeStyle: "short",
+              }),
+              brand: formData.brand.trim(),
+              model: formData.model.trim(),
+              issue: formData.issue.trim(),
+              description: (formData.description || "").trim(),
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              phone: formData.phone.trim(),
+            };
+
+            await fetch(GOOGLE_SHEET_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(payload),
+            });
           }
 
           setStep(3);
